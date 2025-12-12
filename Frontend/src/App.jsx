@@ -1,15 +1,29 @@
-import { useState } from 'react'
+import { Routes, Route, Navigate } from "react-router-dom";
+
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import SettingsPage from "./pages/SettingsPage";
+import ProfilePage from "./pages/ProfilePage";
 
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
-    <>
-      <h1 className="text-4xl font-bold text-red-500">Hello Tailwind 4!</h1>
+   <div >
+      
 
+      <Routes>
+        <Route path="/" element={ <HomePage /> } />
+        <Route path="/signup" element={<SignUpPage /> } />
+        <Route path="/login" element={ <LoginPage /> } />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/profile" element={ <ProfilePage /> } />
+      </Routes>
 
-    </>
+ 
+    </div>
   )
 }
 
