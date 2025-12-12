@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage";
 import { useAuthStore } from "./store/useAuthStore";
 import {Loader} from "lucide-react"
 import { Toaster } from "react-hot-toast";
+import Navbar from "./components/Navbar";
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
 
   return (
    <div >
-      
+      <Navbar />
 
      <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
