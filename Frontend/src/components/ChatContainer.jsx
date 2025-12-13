@@ -19,7 +19,13 @@ const ChatContainer = () => {
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
 
+useEffect(() => {
+    getMessages(selectedUser._id);
 
+    subscribeToMessages();
+
+    return () => unsubscribeFromMessages();
+  }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
   useEffect(() => {
     if (messageEndRef.current && messages) {
@@ -60,11 +66,16 @@ const ChatContainer = () => {
                 />
               </div>
             </div>
-            <div className="chat-header mb-1">
-              <time className="text-xs opacity-50 ml-1">
-                {formatMessageTime(message.createdAt)}
-              </time>
-            </div>
+            <div
+  className={`chat-header mb-1 ${
+    message.senderId === authUser._id ? "text-right mr-1" : "ml-1"
+  }`}
+>
+  <time className="text-xs opacity-50">
+    {formatMessageTime(message.createdAt)}
+  </time>
+</div>
+
             <div className="chat-bubble flex flex-col">
               {message.image && (
                 <img
