@@ -12,7 +12,8 @@ import cors from "cors"
 dotenv.config()
 const app= express();
 
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser())
 app.use(cors({
   origin:"http://localhost:5173",
@@ -21,7 +22,7 @@ app.use(cors({
 
 const PORT=process.env.PORT
 app.use("/api/auth",authroutes)
-app.use("/api/message",messageroutes)
+app.use("/api/messages",messageroutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
