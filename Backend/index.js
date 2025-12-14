@@ -8,12 +8,14 @@ import cors from "cors";
 import {app,server} from "./lib/socket.js"
 
 import path from "path";
+import { fileURLToPath } from "url";
 
 
 dotenv.config()
 
 const PORT=process.env.PORT||3000;
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
@@ -26,10 +28,12 @@ app.use(
 );
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "Frontend/dist")));
+  const frontendPath = path.join(__dirname, "..", "Frontend", "dist");
+
+  app.use(express.static(frontendPath));
 
   app.use((req, res) => {
-    res.sendFile(path.join(__dirname, "Frontend/dist/index.html"));
+    res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
 
