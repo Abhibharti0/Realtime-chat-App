@@ -7,9 +7,14 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin:
+      process.env.NODE_ENV === "production"
+        ? ["https://realtime-chat-app-rkyz.vercel.app"]
+        : ["http://localhost:5173"],
+    credentials: true,
   },
 });
+
 
 const userSocketMap = {}; // { userId: socketId }
 
