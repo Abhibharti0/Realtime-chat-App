@@ -19,7 +19,7 @@ app.use(cookieParser())
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://realtime-chat-app-one-wine.vercel.app",
+    "https://realtime-chat-app-rkyz.vercel.app",
   ],
   credentials: true,
 }));
