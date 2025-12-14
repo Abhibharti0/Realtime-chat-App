@@ -14,6 +14,8 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("BACKEND URL:", import.meta.env.VITE_BACKEND_URL);
+
     login(formData);
   };
 
