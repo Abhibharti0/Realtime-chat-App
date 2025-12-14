@@ -17,7 +17,10 @@ export const useChatStore = create((set, get) => ({
       const res = await axiosInstance.get("/messages/users");
       set({ users: res.data });
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(
+  error?.response?.data?.message || "Unauthorized. Please login again."
+);
+
     } finally {
       set({ isUsersLoading: false });
     }
